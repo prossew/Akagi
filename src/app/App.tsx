@@ -1,3 +1,4 @@
+import { DashboardGrid } from "../widgets/dashboard-grid/index.ts";
 import { Sidebar } from "../widgets/sidebar/ui/Sidebar.tsx";
 
 export default function App() {
@@ -13,7 +14,7 @@ export default function App() {
           </div>
         </header>
         <section className="flex-1 p-8 text-white">
-          <p className="text-slate-500">Сетка</p>
+          <DashboardGrid />
         </section>
       </main>
     </div>
