@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { marketRatesSignal } from "@/entities/market-rate";
+import { ConvertForm } from "@/features/convert-currency";
 import { AccountCard } from "@/entities/account";
 import type { BankAccount } from "@/entities/account";
 import { useSignals } from "@preact/signals-react/runtime";
@@ -185,14 +186,14 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      <Card className="bg-[#111827] border-slate-800 text-white">
-        <CardHeader className="py-3">
+      <Card className="bg-[#111827] border-slate-800 text-white flex flex-col h-88">
+        <CardHeader className="py-3 flex-shrink-0">
           <CardTitle className="text-sm font-medium text-slate-400">
             Быстрый обмен
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-xs text-slate-500">
-          Инпуты конвертации
+        <CardContent className="flex-1 pb-1 px-6 ">
+          <ConvertForm />
         </CardContent>
       </Card>
 
