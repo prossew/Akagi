@@ -11,11 +11,11 @@ export default function App() {
   );
 
   return (
-    <div className="flex h-screen w-screen bg-[#070A13] overflow-hidden">
+    <div className="flex h-screen w-screen bg-[#070A13] overflow-hidden text-slate-100">
       <Sidebar />
 
-      <main className="flex-1 flex flex-col overflow-y-auto">
-        <header className="flex items-center justify-beetween px-8 h-20 border-b border-slate-800">
+      <main className="flex-1 flex flex-col overflow-y-auto min-h-0">
+        <header className="flex items-center justify-between px-8 h-20 border-b border-slate-800 flex-shrink-0 bg-[#070A13]/80 backdrop-blur sticky top-0 z-50">
           <h1 className="text-xl font-semibold text-white">Дашборд</h1>
           <div className="flex items-center gap-6">
             <Button
@@ -33,7 +33,8 @@ export default function App() {
             <span className="text-xl text-slate-400">Привет, Олег</span>
           </div>
         </header>
-        <section className="flex-1 p-8 text-white">
+
+        <section className="p-8 w-full max-w-[1600px] mx-auto h-full">
           <DashboardGrid />
         </section>
       </main>

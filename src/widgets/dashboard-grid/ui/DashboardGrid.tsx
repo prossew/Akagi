@@ -1,10 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { marketRatesSignal } from "@/entities/market-rate";
-import { ConvertForm } from "@/features/convert-currency";
 import { AccountCard } from "@/entities/account";
 import type { BankAccount } from "@/entities/account";
 import { useSignals } from "@preact/signals-react/runtime";
 import { useUIStore } from "@/shared/model/ui-store";
+import { ConvertForm } from "@/features/convert-currency";
+import {
+  MOCK_TRANSACTIONS,
+  MOCK_EXPENSES_BY_CATEGORY,
+} from "@/entities/transaction";
+
 import {
   AreaChart,
   Area,
@@ -13,6 +18,9 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 
 const MOCK_ACCOUNTS: BankAccount[] = [
@@ -56,7 +64,7 @@ export function DashboardGrid() {
   const isBalanceHidden = useUIStore((state) => state.isBalanceHidden);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[160px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-12">
       <Card className="md:col-span-2 row-span-1 bg-[#111827] border-slate-800 text-white">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -186,36 +194,93 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      <Card className="bg-[#111827] border-slate-800 text-white flex flex-col h-88">
+      <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader className="py-3 flex-shrink-0">
           <CardTitle className="text-sm font-medium text-slate-400">
             Быстрый обмен
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 pb-1 px-6 ">
+        <CardContent className="flex-1 pb-4 px-6">
           <ConvertForm />
         </CardContent>
       </Card>
 
-      <Card className="bg-[#111827] border-slate-800 text-white">
-        <CardHeader className="py-3">
+      <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
+        <CardHeader className="py-3 flex-shrink-0">
           <CardTitle className="text-sm font-medium text-slate-400">
             Аналитика трат
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-xs text-slate-500">
-          Круговая диаграмма
+        <CardContent className="flex-1 flex flex-col items-center justify-center pb-4">
+          <div className="w-full h-24">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={MOCK_EXPENSES_BY_CATEGORY}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={25}
+                  outerRadius={38}
+                  paddingAngle={4}
+                  dataKey="value"
+                >
+                  {MOCK_EXPENSES_BY_CATEGORY.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 mt-2 text-[10px] text-slate-400 w-full px-2">
+            {MOCK_EXPENSES_BY_CATEGORY.slice(0, 4).map((item) => (
+              <div
+                key={item.name}
+                className="flex items-center gap-1.5 truncate"
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: item.color }}
+                />
+                <span className="truncate">{item.name}</span>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-[#111827] border-slate-800 text-white">
-        <CardHeader className="py-3">
+      <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
+        <CardHeader className="py-3 flex-shrink-0">
           <CardTitle className="text-sm font-medium text-slate-400">
             Последние транзакции
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-xs text-slate-500">
-          Список покупок
+        <CardContent className="flex-1 overflow-y-auto px-4 pb-3 flex flex-col gap-2.5">
+          {MOCK_TRANSACTIONS.slice(0, 3).map((tx) => {
+            const isIncome = tx.type === "income";
+            return (
+              <div
+                key={tx.id}
+                className="flex items-center justify-between text-xs border-b border-slate-800/40 pb-2 last:border-0 last:pb-0"
+              >
+                <div className="truncate pr-2">
+                  <div className="font-medium text-slate-200 truncate">
+                    {tx.title}
+                  </div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">
+                    {tx.date}
+                  </div>
+                </div>
+                <div
+                  className={`font-mono font-semibold flex-shrink-0 ${isIncome ? "text-emerald-400" : "text-slate-300"}`}
+                >
+                  {isBalanceHidden
+                    ? "••••"
+                    : `${isIncome ? "+" : "-"}${tx.amount.toLocaleString()} ₽`}
+                </div>
+              </div>
+            );
+          })}
         </CardContent>
       </Card>
     </div>
