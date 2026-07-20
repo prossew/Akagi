@@ -3,6 +3,7 @@ import { marketRatesSignal } from "@/entities/market-rate";
 import { AccountCard } from "@/entities/account";
 import type { BankAccount } from "@/entities/account";
 import { useSignals } from "@preact/signals-react/runtime";
+import { useUIStore } from "@/shared/model/ui-store";
 
 const MOCK_ACCOUNTS: BankAccount[] = [
   {
@@ -32,10 +33,15 @@ const MOCK_ACCOUNTS: BankAccount[] = [
 ];
 
 export function DashboardGrid() {
+  // Активируем отслеживание сигналов для реалтайм-котировок
   useSignals();
+
+  // Достаем состояние скрытия баланса из Zustand
+  const isBalanceHidden = useUIStore((state) => state.isBalanceHidden);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[160px]">
+      {/* 1. Глобальный баланс с поддержкой скрытия */}
       <Card className="md:col-span-2 row-span-1 bg-[#111827] border-slate-800 text-white">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -44,12 +50,13 @@ export function DashboardGrid() {
         </CardHeader>
         <CardContent>
           <div className="text-3xl font-bold tracking-tight font-mono">
-            380 000.00 ₽
+            {isBalanceHidden ? "•••••• ₽" : "380 000.00 ₽"}
           </div>
           <p className="text-xs text-emerald-400 mt-1">+4,2% в этом месяце</p>
         </CardContent>
       </Card>
 
+      {/* 2. Мои счета (пропсы внутри AccountCard сами отработают скрытие) */}
       <Card className="row-span-2 bg-[#111827] border-slate-800 text-white">
         <CardHeader>
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -63,6 +70,7 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
+      {/* 3. Онлайн котировки */}
       <Card className="row-span-3 bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader>
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -104,6 +112,7 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
+      {/* 4. Рост портфеля */}
       <Card className="md:col-span-2 row-span-2 bg-[#111827] border-slate-800 text-white">
         <CardHeader>
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -115,6 +124,7 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
+      {/* 5. Быстрый обмен */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -126,6 +136,7 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
+      {/* 6. Аналитика трат */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -137,6 +148,7 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
+      {/* 7. Последние транзакции */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">
