@@ -9,7 +9,7 @@ import {
   ChevronRight,
   Wallet,
 } from "lucide-react";
-import { Button } from "../../../shared/ui/button";
+import { Button } from "@/shared/ui/button";
 
 const MENU_ITEMS = [
   { icon: LayoutDashboard, label: "Дашборд", value: "dashboard" },
@@ -32,7 +32,7 @@ export function Sidebar() {
             "flex items-center justify-center w10 h10 rounded-xl bg-elemerald-500/10 text-emerald-400"
           }
         >
-          <Wallet className="w-6 h-6"/>
+          <Wallet className="w-6 h-6" />
         </div>
         {!isCollapsed && (
           <span className="text-xl font-bold text-white tracking-wider ">
