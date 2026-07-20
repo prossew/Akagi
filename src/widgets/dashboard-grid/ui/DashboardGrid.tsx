@@ -4,6 +4,15 @@ import { AccountCard } from "@/entities/account";
 import type { BankAccount } from "@/entities/account";
 import { useSignals } from "@preact/signals-react/runtime";
 import { useUIStore } from "@/shared/model/ui-store";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const MOCK_ACCOUNTS: BankAccount[] = [
   {
@@ -32,16 +41,21 @@ const MOCK_ACCOUNTS: BankAccount[] = [
   },
 ];
 
-export function DashboardGrid() {
-  // Активируем отслеживание сигналов для реалтайм-котировок
-  useSignals();
+const MOCK_CHART_DATA = [
+  { month: "Янв", balance: 290000 },
+  { month: "Фев", balance: 310000 },
+  { month: "Мар", balance: 300000 },
+  { month: "Апр", balance: 340000 },
+  { month: "Май", balance: 330000 },
+  { month: "Июн", balance: 380000 },
+];
 
-  // Достаем состояние скрытия баланса из Zustand
+export function DashboardGrid() {
+  useSignals();
   const isBalanceHidden = useUIStore((state) => state.isBalanceHidden);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[160px]">
-      {/* 1. Глобальный баланс с поддержкой скрытия */}
       <Card className="md:col-span-2 row-span-1 bg-[#111827] border-slate-800 text-white">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -56,7 +70,6 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      {/* 2. Мои счета (пропсы внутри AccountCard сами отработают скрытие) */}
       <Card className="row-span-2 bg-[#111827] border-slate-800 text-white">
         <CardHeader>
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -70,7 +83,6 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      {/* 3. Онлайн котировки */}
       <Card className="row-span-3 bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader>
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -112,19 +124,67 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      {/* 4. Рост портфеля */}
-      <Card className="md:col-span-2 row-span-2 bg-[#111827] border-slate-800 text-white">
-        <CardHeader>
+      <Card className="md:col-span-2 row-span-2 bg-[#111827] border-slate-800 text-white flex flex-col">
+        <CardHeader className="pb-0">
           <CardTitle className="text-sm font-medium text-slate-400">
             Рост портфеля
           </CardTitle>
         </CardHeader>
-        <CardContent className="h-[200px] flex items-center justify-center text-slate-600">
-          график Recharts
+        <CardContent className="flex-1 min-h-[220px] pt-4 pr-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={MOCK_CHART_DATA}>
+              <defs>
+                <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#1F2937"
+                vertical={false}
+              />
+              <XAxis
+                dataKey="month"
+                stroke="#64748B"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="#64748B"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `${value / 1000}k`}
+                hide={isBalanceHidden}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1F2937",
+                  borderColor: "#374151",
+                  borderRadius: "8px",
+                }}
+                labelStyle={{ color: "#94A3B8" }}
+                itemStyle={{ color: "#FFF" }}
+                formatter={(value: any) => [
+                  isBalanceHidden ? "•••••• ₽" : `${value.toLocaleString()} ₽`,
+                  "Баланс",
+                ]}
+              />
+              <Area
+                type="monotone"
+                dataKey="balance"
+                stroke="#10B981"
+                strokeWidth={2}
+                fillOpacity={1}
+                fill="url(#colorBalance)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
 
-      {/* 5. Быстрый обмен */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -136,7 +196,6 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      {/* 6. Аналитика трат */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">
@@ -148,7 +207,6 @@ export function DashboardGrid() {
         </CardContent>
       </Card>
 
-      {/* 7. Последние транзакции */}
       <Card className="bg-[#111827] border-slate-800 text-white">
         <CardHeader className="py-3">
           <CardTitle className="text-sm font-medium text-slate-400">

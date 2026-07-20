@@ -30,7 +30,7 @@ export default function App() {
                 <Eye className="h-5 w-5" />
               )}
             </Button>
-            <span className="text-xl text-slate-400 p-5">Привет, Олег</span>
+            <span className="text-xl text-slate-400">Привет, Олег</span>
           </div>
         </header>
         <section className="flex-1 p-8 text-white">
