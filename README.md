@@ -1,34 +1,52 @@
-# React + TypeScript + Vite
+# Akagi Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Akagi is a React + TypeScript dashboard application built with Vite, Tailwind CSS, and Zustand. It includes a responsive sidebar, dashboard grid widgets, account and transaction UI components, and a balance visibility toggle.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 with Vite for fast development and production builds
+- TypeScript support and modern frontend architecture
+- Tailwind CSS styling and reusable component design
+- Zustand for lightweight UI state management
+- Responsive dashboard layout with sidebar navigation
+- Balance visibility toggle and dashboard widgets
 
-## React Compiler
+## Project Structure
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- `src/app/` - application entry, global styles, and root layout
+- `src/features/` - feature-specific modules and UI
+- `src/widgets/` - reusable dashboard and layout widgets
+- `src/shared/` - shared UI components, state store, and utilities
+- `src/assets/` - business models and domain data
 
-Note: This will impact Vite dev & build performances.
+### Install dependencies
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Run development server
+
+```bash
+npm run dev
+```
+
+Open the local URL shown in the terminal to view the app.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+### Run linting
+
+```bash
+npm run lint
+```
