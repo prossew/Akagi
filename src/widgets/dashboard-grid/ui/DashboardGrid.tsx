@@ -67,7 +67,7 @@ export function DashboardGrid() {
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-12">
       <Card className="md:col-span-2 row-span-1 bg-[#111827] border-slate-800 text-white">
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Глобальный баланс
           </CardTitle>
         </CardHeader>
@@ -81,20 +81,24 @@ export function DashboardGrid() {
 
       <Card className="row-span-2 bg-[#111827] border-slate-800 text-white">
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Мои счета
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           {MOCK_ACCOUNTS.map((acc) => (
-            <AccountCard key={acc.id} account={acc} />
+            <AccountCard
+              key={acc.id}
+              account={acc}
+              isBalanceHidden={isBalanceHidden}
+            />
           ))}
         </CardContent>
       </Card>
 
       <Card className="row-span-3 bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Онлайн котировки
           </CardTitle>
         </CardHeader>
@@ -135,7 +139,7 @@ export function DashboardGrid() {
 
       <Card className="md:col-span-2 row-span-2 bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader className="pb-0">
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Рост портфеля
           </CardTitle>
         </CardHeader>
@@ -144,8 +148,8 @@ export function DashboardGrid() {
             <AreaChart data={MOCK_CHART_DATA}>
               <defs>
                 <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#EC4899" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#EC4899" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
@@ -184,7 +188,7 @@ export function DashboardGrid() {
               <Area
                 type="monotone"
                 dataKey="balance"
-                stroke="#10B981"
+                stroke="#EC4899"
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#colorBalance)"
@@ -196,7 +200,7 @@ export function DashboardGrid() {
 
       <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader className="py-3 flex-shrink-0">
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Быстрый обмен
           </CardTitle>
         </CardHeader>
@@ -207,7 +211,7 @@ export function DashboardGrid() {
 
       <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader className="py-3 flex-shrink-0">
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text ">
             Аналитика трат
           </CardTitle>
         </CardHeader>
@@ -251,7 +255,7 @@ export function DashboardGrid() {
 
       <Card className="bg-[#111827] border-slate-800 text-white flex flex-col">
         <CardHeader className="py-3 flex-shrink-0">
-          <CardTitle className="text-sm font-medium text-slate-400">
+          <CardTitle className="text-sm font-medium text-text">
             Последние транзакции
           </CardTitle>
         </CardHeader>

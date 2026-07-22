@@ -24,18 +24,18 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`relative flex flex-col h-screen bg-[#0B0F19] border-r border-slate 800 text-slate-400 transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"}`}
+      className={`relative flex flex-col h-screen bg-slate border-r border-slate 800 text-text transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"}`}
     >
       <div className="flex item-center gap-3 p-6 border-b border-slate-800 h-20">
         <div
           className={
-            "flex items-center justify-center w10 h10 rounded-xl bg-elemerald-500/10 text-emerald-400"
+            "flex items-center justify-center w10 h10 rounded-xl bg-slate text-text"
           }
         >
           <Wallet className="w-6 h-6" />
         </div>
         {!isCollapsed && (
-          <span className="text-xl font-bold text-white tracking-wider ">
+          <span className="text-xl font-bold text-text tracking-wider ">
             Akagi
           </span>
         )}
@@ -44,7 +44,7 @@ export function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-6 right-4 h8 w8 rounded-full border-slate 800 bg-[#0B0F19] text slate-400 hover: text-white hover:text-white hover:bg-slate 800 z-10"
+        className="absolute top-6 right-4 h8 w8 rounded-full border-slate 800 bg-[#0B0F19] text slate-400 hover: text-text hover:text-white hover:bg-slate 800 z-10"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? (
@@ -62,7 +62,7 @@ export function Sidebar() {
             <button
               key={item.value}
               onClick={() => setActiveTab(item.value)}
-              className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all font-medium ${isActive ? "bg-emerald-500/10 text-emerald-400" : "hover:bg-slate-800/50 hover:text-white"}`}
+              className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all font-medium ${isActive ? "bg-blue-500/10 text-white" : "hover:bg-slate-800/50 hover:text-white"}`}
             >
               <Icon className="w-5 h-5 shrink-0" />
               {!isCollapsed && <span className="text-sm">{item.label}</span>}

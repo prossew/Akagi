@@ -11,12 +11,12 @@ export default function App() {
   );
 
   return (
-    <div className="flex h-screen w-screen bg-[#070A13] overflow-hidden text-slate-100">
+    <div className="flex h-screen w-screen bg-brand overflow-hidden text-slate-100">
       <Sidebar />
 
       <main className="flex-1 flex flex-col overflow-y-auto min-h-0">
-        <header className="flex items-center justify-between px-8 h-20 border-b border-slate-800 flex-shrink-0 bg-[#070A13]/80 backdrop-blur sticky top-0 z-50">
-          <h1 className="text-xl font-semibold text-white">Дашборд</h1>
+        <header className="flex items-center justify-between px-8 h-20 border-b border-slate-800 flex-shrink-0 bg-brand/80 backdrop-blur sticky top-0 z-50">
+          <h1 className="text-xl font-semibold text-text / 400">Дашборд</h1>
           <div className="flex items-center gap-6">
             <Button
               variant="ghost"
@@ -30,7 +30,7 @@ export default function App() {
                 <Eye className="h-5 w-5" />
               )}
             </Button>
-            <span className="text-xl text-slate-400">Привет, Олег</span>
+            <span className="text-xl text-text / 400">Привет, Гость</span>
           </div>
         </header>
 

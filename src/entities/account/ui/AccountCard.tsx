@@ -3,9 +3,10 @@ import type { BankAccount } from "../model/type";
 
 interface AcountCardProps {
   account: BankAccount;
+  isBalanceHidden?: boolean;
 }
 
-export function AccountCard({ account }: AcountCardProps) {
+export function AccountCard({ account, isBalanceHidden }: AcountCardProps) {
   const getIcon = () => {
     switch (account.type) {
       case "crypto":
@@ -45,7 +46,9 @@ export function AccountCard({ account }: AcountCardProps) {
       </div>
       <div className="text-right">
         <span className="text-sm font-semibold text-white font-mono">
-          {formatBalance(account.balance, account.currency)}
+          {isBalanceHidden
+            ? "••••••"
+            : formatBalance(account.balance, account.currency)}
         </span>
       </div>
     </div>

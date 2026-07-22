@@ -112,7 +112,7 @@ export function ConvertForm() {
       <Button
         type="submit"
         disabled={!amount || fromCurrency === toCurrency}
-        className="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs py-1.5 h-8 mt-1 rounded-lg transition-colors disabled:opacity-40 disabled:hover:bg-emerald-600"
+        className="w-full bg-text hover:bg-emerald-500 text-white text-xs py-1.5 h-8 mt-1 rounded-lg transition-colors disabled:opacity-40 disabled:hover:bg-emerald-600"
       >
         Обменять в 1 клик
       </Button>
