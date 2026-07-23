@@ -78,12 +78,12 @@ export function AnalyticsSection() {
                     >
                       <stop
                         offset="5%"
-                        stopColor={"var(--color-brand)"}
+                        stopColor={"var(--color-text)"}
                         stopOpacity={0.4}
                       />
                       <stop
                         offset="95%"
-                        stopColor={"var(--color-brand)"}
+                        stopColor={"var(--color-text)"}
                         stopOpacity={0}
                       />
                     </linearGradient>
@@ -98,11 +98,13 @@ export function AnalyticsSection() {
                       borderRadius: "0.75rem",
                       color: "#fff",
                     }}
+                    
                   />
                   <Area
                     type="monotone"
                     dataKey="spending"
-                    stroke={"var(--color-brand)"}
+                    name="Расходы"
+                    stroke={"var(--color-text)"}
                     strokeWidth={3}
                     fillOpacity={1}
                     fill="url(#colorSpending)"
@@ -113,7 +115,7 @@ export function AnalyticsSection() {
           </div>
 
           <div className="p-5 bg-slate-900/60 rounded-2xl border border-slate-800">
-            <h3 className="text-sm font-semibold text-slate-300 mb-4">
+            <h3 className="text-sm font-semibold text-text mb-4">
               Расходы по категориям
             </h3>
 
@@ -154,7 +156,7 @@ export function AnalyticsSection() {
 
         <div className="space-y-6">
           <div className="p-5 bg-slate-900/60 rounded-2xl border border-slate-800 space-y-4">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-light">
+            <h3 className="text-xs font-sans uppercase tracking-wider text-brand-light font-bold">
               Инсайты по тратам
             </h3>
 
@@ -203,7 +205,7 @@ export function AnalyticsSection() {
           </div>
 
           <div className="p-5 bg-slate-900/60 rounded-2xl border border-slate-800">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+            <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 text-text">
               Последние операции
             </h3>
             <div className="space-y-2">

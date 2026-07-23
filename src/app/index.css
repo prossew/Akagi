@@ -2,12 +2,47 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+/* 
+@custom-variant dark (&:is(.dark *)) {
+  --font-sans: "Geomini", sans-serif;
+  --font-heading: var(--font-sans);
+} */
 
-@custom-variant dark (&:is(.dark *));
+@font-face {
+  font-family: "Geomini";
+  src: url("../shared/assets/fonts/Geomini-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geomini";
+  src: url("../shared/assets/fonts/Geomini-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geomini";
+  src: url("../shared/assets/fonts/Geomini-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geomini";
+  src: url("../shared/assets/fonts/Geomini-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Inter Variable", sans-serif;
+  --font-sans: "Geomini", sans-serif;
 
   --color-brand: #000;
   --color-text: #f472b6;
@@ -129,8 +164,21 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family:
+      "Geomini",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
   }
   html {
-    @apply font-sans;
+    font-family:
+      "Geomini",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
   }
 }
